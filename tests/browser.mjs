@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { startServer } from '../scripts/serve.mjs';
+import { verifyWorkerPaths } from './worker-paths.mjs';
 import { unzipSync } from '../vendor/fflate.mjs';
 
 const { chromium } = createRequire(import.meta.url)('playwright');
@@ -301,16 +302,19 @@ try {
   await cachedPage.locator('#demo').click();
   await cachedPage.locator('#review .photo-card').first().waitFor({timeout: 120_000});
   assert.equal(await cachedPage.locator('#review .photo-card').count(), 6);
-  const offlineKind = await cachedPage.evaluate(async () => {
-    const { extractEmbedding } = await import('./src/embedding.js');
-    return (await extractEmbedding(document.querySelector('.print img'), {requiredModel:true})).kind;
+  const offlineModel = await cachedPage.evaluate(async () => {
+    const { extractEmbedding, inferenceDiagnostics } = await import('./src/embedding.js');
+    const { kind } = await extractEmbedding(document.querySelector('.print img'), {requiredModel:true});
+    return { kind, location: inferenceDiagnostics().location };
   });
-  assert.equal(offlineKind, 'mobilenet', 'Offline inference must use the actual model');
+  assert.deepEqual(offlineModel, { kind: 'mobilenet', location: 'worker' }, 'Offline inference must use the cached worker and model');
   assert.ok(servedFromWorker.has('/vendor/mobilenet/model.json'));
   assert.ok([...servedFromWorker].some(url => url.startsWith('/vendor/mobilenet/') && url.endsWith('.bin')));
   await offline.close();
   assert.deepEqual(issues, []);
   console.log('PASS installed service worker, offline navigation, cached weights and real offline inference');
+  await verifyWorkerPaths(browser, origin);
+  console.log('PASS concurrent worker inference, fallback without Workers/OffscreenCanvas, runtime failure and strict model semantics');
 } finally {
   await browser?.close();
   await new Promise(resolve => server.close(resolve));

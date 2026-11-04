@@ -1,21 +1,51 @@
 import { normalized, SEMANTIC_SIZE } from './ml.js';
+import { runModel } from './model-runtime.js';
 
-const RUNTIME = new URL('../vendor/tfjs/tf.es2017.min.js', import.meta.url);
-const WEIGHTS = new URL('../vendor/mobilenet/model.json', import.meta.url);
-let loading;
+let worker, watchdog, workerFailure = '', nextId = 0;
+const pending = new Map();
+let diagnostics = { location: 'idle', backend: null };
+export const inferenceDiagnostics = () => ({ ...diagnostics, workerFailure });
 
-function getModel() {
-  if (!loading) loading = (async () => {
-    await import(RUNTIME.href);
-    const tf = globalThis.tf;
-    // Use GPU acceleration where the browser offers it. The CPU backend keeps the
-    // same learned feature space on devices without WebGL or cross-origin isolation.
-    const accelerated = await tf.setBackend('webgl').catch(() => false);
-    if (!accelerated && !await tf.setBackend('cpu')) throw new Error('TensorFlow.js backends unavailable');
-    const model = await tf.loadGraphModel(WEIGHTS.href);
-    return { model, tf };
-  })();
-  return loading;
+function disableWorker(error) {
+  workerFailure = error.message || 'The inference worker failed';
+  clearTimeout(watchdog);
+  worker?.terminate();
+  worker = undefined;
+  for (const task of pending.values()) task.reject(error);
+  pending.clear();
+}
+
+function watchProgress() {
+  clearTimeout(watchdog);
+  if (pending.size) watchdog = setTimeout(() => disableWorker(new Error('Inference worker did not respond')), 45_000);
+}
+
+function workerModel(frame) {
+  if (!worker) {
+    worker = new Worker(new URL('./embed-worker.js', import.meta.url), { type: 'module', name: 'Album Atlas inference' });
+    worker.onerror = event => {
+      event.preventDefault();
+      disableWorker(new Error(event.message || 'The inference worker could not start'));
+    };
+    worker.onmessageerror = () => disableWorker(new Error('The inference worker returned an unreadable message'));
+    worker.onmessage = ({ data }) => {
+      const task = pending.get(data.id);
+      if (!task) return;
+      if (data.error) { disableWorker(new Error(data.error)); return; }
+      pending.delete(data.id);
+      watchProgress();
+      task.resolve(data);
+    };
+  }
+  return new Promise((resolve, reject) => {
+    const id = ++nextId;
+    pending.set(id, { resolve, reject });
+    if (pending.size === 1) watchProgress();
+    try {
+      const rgba = frame.data.buffer;
+      worker.postMessage({ id, rgba, width: frame.width, height: frame.height }, [rgba]);
+    } catch (error) { disableWorker(error); }
+  });
 }
 
 function raster(image, size) {
@@ -69,23 +99,23 @@ export async function extractEmbedding(image, { forceVisual = false, requiredMod
   const visual = visualDescriptor(thumb.data, thumb.width, thumb.height);
   if (!forceVisual) {
     try {
-      const { tf, model } = await getModel();
-      const frame = raster(image, 224);
-      const output = tf.tidy(() => {
-        // The graph itself converts RGB in [0, 1] to the network's [-1, 1] range.
-        const pixels = tf.browser.fromPixels(frame, 3).toFloat().div(255).expandDims(0);
-        return model.predict(pixels);
-      });
-      try {
-        const learned = await output.data();
-        if (learned.length !== SEMANTIC_SIZE || !learned.every(Number.isFinite) || !learned.some(v => v !== 0)) {
-          throw new Error('Model returned an invalid embedding');
-        }
-        return { vector: [...normalized(learned), ...visual], kind: 'mobilenet' };
-      } finally { output.dispose(); }
+      let result;
+      if (!workerFailure && typeof Worker !== 'function') workerFailure = 'Web Workers are unavailable';
+      if (!workerFailure) {
+        try { result = await workerModel(raster(image, 224)); }
+        catch (error) { if (!workerFailure) disableWorker(error); }
+      }
+      const location = result ? 'worker' : 'main';
+      // Transfer detaches the worker-bound pixels. Re-rasterize from the retained
+      // source only when the worker failed or its platform API is unavailable.
+      result ??= await runModel(raster(image, 224));
+      diagnostics = { location, backend: result.backend };
+      return { vector: [...result.learned, ...visual], kind: 'mobilenet' };
     } catch (error) {
+      diagnostics = { location: 'visual', backend: null, modelError: error.message };
       if (requiredModel) throw error;
     }
   }
+  if (forceVisual) diagnostics = { location: 'visual', backend: null, forced: true };
   return { vector: [...Array(SEMANTIC_SIZE).fill(0), ...visual], kind: 'visual' };
 }

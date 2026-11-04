@@ -1,0 +1,1739 @@
+{
+  "baselineCommit": "5583e51885ac326eb46160eae898d0bb8a140cd0",
+  "platform": "win32",
+  "arch": "x64",
+  "dataset": "12 bundled demo JPEGs, workflow.ingest",
+  "trials": [
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2706,
+      "maxGapMs": 2032,
+      "p95GapMs": 51,
+      "gapsOver100": 2,
+      "gapsOver250": 1,
+      "ticks": 31,
+      "firstFileMs": 2324,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 372,
+      "maxGapMs": 27,
+      "p95GapMs": 24,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 22,
+      "firstFileMs": 36,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2801,
+      "maxGapMs": 45,
+      "p95GapMs": 22,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 142,
+      "firstFileMs": 2360,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 472,
+      "maxGapMs": 29,
+      "p95GapMs": 27,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 27,
+      "firstFileMs": 36,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 6895,
+      "maxGapMs": 585,
+      "p95GapMs": 564,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 27,
+      "firstFileMs": 784,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6670,
+      "maxGapMs": 576,
+      "p95GapMs": 564,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 18,
+      "firstFileMs": 552,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 7076,
+      "maxGapMs": 55,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 356,
+      "firstFileMs": 858,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6748,
+      "maxGapMs": 24,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 341,
+      "firstFileMs": 582,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2814,
+      "maxGapMs": 39,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 144,
+      "firstFileMs": 2360,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 471,
+      "maxGapMs": 29,
+      "p95GapMs": 27,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 27,
+      "firstFileMs": 36,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2826,
+      "maxGapMs": 2003,
+      "p95GapMs": 47,
+      "gapsOver100": 2,
+      "gapsOver250": 1,
+      "ticks": 38,
+      "firstFileMs": 2332,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 385,
+      "maxGapMs": 28,
+      "p95GapMs": 22,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 23,
+      "firstFileMs": 39,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 6796,
+      "maxGapMs": 28,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 343,
+      "firstFileMs": 695,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6663,
+      "maxGapMs": 26,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 336,
+      "firstFileMs": 549,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 6891,
+      "maxGapMs": 605,
+      "p95GapMs": 592,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 24,
+      "firstFileMs": 767,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6618,
+      "maxGapMs": 579,
+      "p95GapMs": 567,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 20,
+      "firstFileMs": 542,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2700,
+      "maxGapMs": 2010,
+      "p95GapMs": 40,
+      "gapsOver100": 2,
+      "gapsOver250": 1,
+      "ticks": 31,
+      "firstFileMs": 2346,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 358,
+      "maxGapMs": 27,
+      "p95GapMs": 23,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 21,
+      "firstFileMs": 25,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "webgl"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "elapsedMs": 2864,
+      "maxGapMs": 37,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 147,
+      "firstFileMs": 2353,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "elapsedMs": 527,
+      "maxGapMs": 27,
+      "p95GapMs": 26,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 30,
+      "firstFileMs": 41,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "webgl",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 7058,
+      "maxGapMs": 645,
+      "p95GapMs": 599,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 28,
+      "firstFileMs": 785,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6854,
+      "maxGapMs": 618,
+      "p95GapMs": 582,
+      "gapsOver100": 12,
+      "gapsOver250": 12,
+      "ticks": 22,
+      "firstFileMs": 585,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "main",
+        "backend": "cpu"
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "elapsedMs": 6901,
+      "maxGapMs": 51,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 347,
+      "firstFileMs": 805,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "elapsedMs": 6545,
+      "maxGapMs": 27,
+      "p95GapMs": 21,
+      "gapsOver100": 0,
+      "gapsOver250": 0,
+      "ticks": 331,
+      "firstFileMs": 536,
+      "files": 12,
+      "kinds": [
+        "mobilenet"
+      ],
+      "errors": [],
+      "runtime": {
+        "location": "worker",
+        "backend": "cpu",
+        "workerFailure": ""
+      },
+      "decisions": [
+        [
+          "shore-03.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "shore-04.jpg",
+          null,
+          "shore"
+        ],
+        [
+          "forest-03.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "forest-04.jpg",
+          null,
+          "forest"
+        ],
+        [
+          "city-03.jpg",
+          null,
+          "city"
+        ],
+        [
+          "city-04.jpg",
+          "city",
+          "city"
+        ]
+      ],
+      "cluster": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "parity": [
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 0,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 1,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": false,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "cold",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    },
+    {
+      "rep": 2,
+      "simulatedNoWebGL": true,
+      "phase": "warm",
+      "maxAbsoluteDifference": 0,
+      "maxCosineDeviation": 0,
+      "assignmentParity": true,
+      "clusterParity": true
+    }
+  ],
+  "browser": "156.0.8078.80"
+}

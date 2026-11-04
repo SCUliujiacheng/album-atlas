@@ -24,6 +24,7 @@
 
 ### 使用细节
 
+- **一次导入很多张，会卡住页面吗？** 相册罗盘 1.2 在支持的浏览器中，把视觉模型的加载与推理移到独立后台线程，文件仍在本机处理。后台线程不可用时会尝试在主线程运行同一模型。[响应速度实测与兼容性](docs/inference-responsiveness.md)
 - **想先摸索一下？** 点击首页的「试用示例」。12 张有来源记录的摄影作品分成 6 张样片和 6 张待归档照片。演示日期用于展示不同的分法。[照片署名](assets/DEMO-CREDITS.md)
 - **想分两次整理？** 主动选择保存本机草稿，下次在同一浏览器恢复。草稿会在此浏览器保存照片副本，清理网站数据或删除草稿即可移除。默认只在当前会话处理。
 - **想断网使用？** 在线首次打开并让离线资源下载完成后，同一浏览器可以离线重新打开，视觉模型也在本地执行。也可以从源码在自己的电脑上运行。
@@ -58,6 +59,8 @@ npm start
 The app serves its model and libraries locally. Optional drafts store copies on your device. The included photographs are a walkthrough. For independently measured matching performance, coverage, and false assignments, see the [evaluation report](docs/model-evaluation.md).
 
 ### Verification
+
+Version 1.2 runs learned image inference in a dedicated worker. The page continues to handle input while the model initializes or processes photos on a CPU-only device. See the [paired v1.1 / v1.2 responsiveness study](docs/inference-responsiveness.md) for timings, fallback behavior and reproduction commands.
 
 ```sh
 npm ci
