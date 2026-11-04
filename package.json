@@ -1,0 +1,17 @@
+{
+  "name": "album-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first photo organization with reference albums, visual grouping and lossless ZIP export.",
+  "license": "MIT",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "build:offline": "node scripts/precache.mjs",
+    "check:offline": "node scripts/precache.mjs --check"
+  },
+  "engines": { "node": ">=22" },
+  "devDependencies": { "playwright": "1.62.1" }
+}

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f2e8" />
+    <meta
+      name="description"
+      content="相册罗盘 Album Atlas。在浏览器本地根据参考照片整理相册，或探索新的分组，再导出整理后的照片副本。"
+    />
+    <title>相册罗盘 · Album Atlas</title>
+    <link rel="icon" href="./assets/brand-mark.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./app.webmanifest" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#workspace" data-cn="跳到整理工作区" data-en="Skip to workspace"
+      >跳到整理工作区</a
+    >
+    <header class="mast">
+      <a href="#top" class="brand" aria-label="Album Atlas"
+        ><img src="./assets/brand-mark.svg" alt="" width="44" height="33" /><span>Album Atlas</span
+        ><i></i><small data-cn="相册罗盘" data-en="Photo organizer">相册罗盘</small></a
+      >
+      <button type="button" id="language" class="language" lang="en" aria-label="Switch to English">
+        English
+      </button>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">
+            <span data-cn="让散落的照片，" data-en="A place for">让散落的照片，</span><br /><span
+              data-cn="各归其位。"
+              data-en="every photo."
+              >各归其位。</span
+            >
+          </h1>
+          <p
+            data-cn="给已有相册补上新照片，或从一叠散片里发现新的分组。看过每一组，再把它们带走。"
+            data-en="Sort new photos into albums you already love, or discover a new way to group a loose collection. Review each set before taking it home."
+          >
+            给已有相册补上新照片，或从一叠散片里发现新的分组。看过每一组，再把它们带走。
+          </p>
+          <div class="actions">
+            <button type="button" id="demo" class="button primary">
+              <span data-cn="试用示例" data-en="Try the demo">试用示例</span
+              ><span aria-hidden="true">↗</span></button
+            ><button
+              type="button"
+              id="choose"
+              class="button outline"
+              data-cn="选择我的照片"
+              data-en="Choose my photos"
+            >
+              选择我的照片
+            </button>
+          </div>
+        </div>
+        <figure class="spread" aria-label="Album Atlas photo contact sheet">
+          <div class="print print-a">
+            <img src="./assets/demo/shore-01.jpg" alt="" fetchpriority="high" /><span
+              ><b>01</b> COAST</span
+            >
+          </div>
+          <div class="print print-b">
+            <img src="./assets/demo/forest-01.jpg" alt="" /><span><b>02</b> FOREST</span>
+          </div>
+          <div class="print print-c">
+            <img src="./assets/demo/city-01.jpg" alt="" /><span><b>03</b> CITY</span>
+          </div>
+        </figure>
+      </section>
+      <div class="ruler" aria-hidden="true">
+        <span>01</span><i></i><span>02</span><i></i><span>03</span>
+      </div>
+      <section id="workspace" tabindex="-1" aria-labelledby="work-title">
+        <div class="section-head">
+          <h2 id="work-title" data-cn="整理工作台" data-en="The sorting desk">整理工作台</h2>
+          <button
+            type="button"
+            class="text"
+            id="reset"
+            hidden
+            data-cn="清空工作台"
+            data-en="Clear workspace"
+          >
+            清空工作台
+          </button>
+        </div>
+        <div
+          class="mode-switch"
+          role="group"
+          aria-label="整理方式"
+          data-label-cn="整理方式"
+          data-label-en="Organization mode"
+        >
+          <button type="button" class="mode" id="known" aria-pressed="true">
+            <span class="index">01</span
+            ><span data-cn="归入已有相册" data-en="Match existing albums">归入已有相册</span>
+          </button>
+          <button type="button" class="mode" id="discover" aria-pressed="false">
+            <span class="index">02</span
+            ><span data-cn="探索新分组" data-en="Discover new groups">探索新分组</span>
+          </button>
+        </div>
+        <div id="live" role="status" aria-live="polite" aria-atomic="true"></div>
+        <div id="errors"></div>
+        <div id="desk"></div>
+        <details id="draft-tools" class="draft-tools">
+          <summary data-cn="本机草稿" data-en="On-device draft">本机草稿</summary>
+          <p
+            class="note"
+            data-cn="手动保存后，可在同一浏览器恢复照片和分组。草稿只保存在此设备，每次保存会替换上一份。"
+            data-en="Save your photos and groups to resume in this browser. Drafts stay on this device. Each save replaces the previous draft."
+          >
+            手动保存后，可在同一浏览器恢复照片和分组。草稿只保存在此设备，每次保存会替换上一份。
+          </p>
+          <p class="note" id="draft-status"></p>
+          <div class="actions">
+            <button
+              type="button"
+              class="small-action"
+              id="draft-save"
+              disabled
+              data-cn="保存本次草稿"
+              data-en="Save current draft"
+            >
+              保存本次草稿</button
+            ><button
+              type="button"
+              class="small-action"
+              id="draft-load"
+              disabled
+              data-cn="恢复草稿"
+              data-en="Restore draft"
+            >
+              恢复草稿</button
+            ><button
+              type="button"
+              class="small-action"
+              id="draft-clear"
+              disabled
+              data-cn="删除本机草稿"
+              data-en="Delete saved draft"
+            >
+              删除本机草稿
+            </button>
+          </div>
+        </details>
+        <noscript
+          >请在浏览器中启用 JavaScript 以整理照片。 Enable JavaScript to organize photos
+          locally.</noscript
+        >
+      </section>
+    </main>
+    <footer>
+      <span
+        ><span class="seal" aria-hidden="true">◇</span
+        ><span
+          data-cn="照片仅在当前浏览器处理，原文件始终保留。"
+          data-en="Processed in this browser. Your originals stay in place."
+          >照片仅在当前浏览器处理，原文件始终保留。</span
+        ></span
+      ><a href="./assets/DEMO-CREDITS.md" data-cn="示例照片来源 ↗" data-en="Demo photo credits ↗"
+        >示例照片来源 ↗</a
+      >
+    </footer>
+    <input id="loose-input" type="file" accept="image/*" multiple hidden />
+    <input id="folder-input" type="file" multiple webkitdirectory hidden />
+    <input id="reference-input" type="file" accept="image/*" multiple hidden />
+    <dialog id="name-dialog">
+      <form id="name-form">
+        <h2 data-cn="新建参考相册" data-en="Create a reference album">新建参考相册</h2>
+        <p
+          data-cn="取一个相册名，再选择能代表它的几张照片。"
+          data-en="Name the album, then pick photos that represent it."
+        >
+          取一个相册名，再选择能代表它的几张照片。
+        </p>
+        <label for="reference-name" data-cn="相册名称" data-en="Album name">相册名称</label
+        ><input id="reference-name" type="text" required maxlength="80" autocomplete="off" />
+        <div class="actions">
+          <button
+            type="submit"
+            class="button primary"
+            data-cn="选择参考照片"
+            data-en="Choose reference photos"
+          >
+            选择参考照片</button
+          ><button
+            type="button"
+            data-close="name-dialog"
+            class="button quiet"
+            data-cn="取消"
+            data-en="Cancel"
+          >
+            取消
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="clear-dialog">
+      <h2 data-cn="清空工作台？" data-en="Clear the workspace?">清空工作台？</h2>
+      <p
+        data-cn="本次分组和未导出的改动会被清除，电脑上的照片会保留。"
+        data-en="Your current groups and unexported changes will be cleared. The photos on your device will stay in place."
+      >
+        本次分组和未导出的改动会被清除，电脑上的照片会保留。
+      </p>
+      <div class="actions">
+        <button type="button" id="clear-confirm" class="button primary" data-cn="清空" data-en="Clear">
+          清空</button
+        ><button
+          type="button"
+          data-close="clear-dialog"
+          class="button quiet"
+          data-cn="取消"
+          data-en="Cancel"
+        >
+          取消
+        </button>
+      </div>
+    </dialog>
+    <dialog id="photo-dialog" aria-labelledby="full-name">
+      <button
+        id="photo-close"
+        type="button"
+        class="button quiet"
+        data-close="photo-dialog"
+        data-cn="关闭预览"
+        data-en="Close preview"
+      >
+        关闭预览</button
+      ><img id="full-photo" alt="" />
+      <p id="full-name"></p>
+      <div id="full-meta" class="detail"></div>
+    </dialog>
+    <dialog id="group-dialog">
+      <form id="group-form">
+        <h2 data-cn="添加目的相册" data-en="Add a destination album">添加目的相册</h2>
+        <p
+          data-cn="新相册将出现在每张照片的移动菜单中。"
+          data-en="The new album will appear in each photo’s move menu."
+        >
+          新相册将出现在每张照片的移动菜单中。
+        </p>
+        <label for="group-name" data-cn="相册名称" data-en="Album name">相册名称</label
+        ><input id="group-name" type="text" required maxlength="80" autocomplete="off" />
+        <div class="actions">
+          <button type="submit" class="button primary" data-cn="添加相册" data-en="Add album">
+            添加相册</button
+          ><button
+            type="button"
+            data-close="group-dialog"
+            class="button quiet"
+            data-cn="取消"
+            data-en="Cancel"
+          >
+            取消
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="./src/ui.js"></script>
+  </body>
+</html>

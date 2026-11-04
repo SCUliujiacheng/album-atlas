@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="48" viewBox="0 0 64 48" fill="none">
+  <rect x="1" y="1" width="62" height="46" rx="4" fill="#282922"/>
+  <path stroke="#f7f3e9" stroke-width="3" stroke-dasharray="4 4" d="M6 6h53M6 42h53"/>
+  <circle cx="32" cy="24" r="13" stroke="#f7f3e9" stroke-width="1.5"/>
+  <g fill="#f7f3e9">
+    <path id="leaf" d="M32 12.2a11.8 11.8 0 0 1 9.5 4.9h-9l-3.4 5.8z"/>
+    <use href="#leaf" transform="rotate(60 32 24)"/><use href="#leaf" transform="rotate(120 32 24)"/>
+    <use href="#leaf" transform="rotate(180 32 24)"/><use href="#leaf" transform="rotate(240 32 24)"/>
+    <use href="#leaf" transform="rotate(300 32 24)"/>
+  </g>
+</svg>
