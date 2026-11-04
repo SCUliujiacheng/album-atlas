@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { copyFile, mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -56,7 +56,7 @@ async function chooseFiles(page, control, files) {
   await ready(page);
 }
 
-async function checkExport(page, expected, album, movedPhoto) {
+async function checkExport(page, expected, album, movedPhoto, skipped = []) {
   const started = page.waitForEvent('download');
   await button(page, 'Download ZIP').click();
   const download = await started;
@@ -65,8 +65,9 @@ async function checkExport(page, expected, album, movedPhoto) {
   const manifest = JSON.parse(new TextDecoder().decode(files['album-atlas.json']));
   assert.equal(manifest.version, 1);
   assert.deepEqual(manifest.photos.map(item => item.original).sort(), [...expected.keys()].sort());
+  assert.deepEqual((manifest.skippedCopies || []).map(item => item.original).sort(), [...skipped].sort());
   assert.equal(Object.keys(files).length, expected.size + 1);
-  assert.ok(manifest.photos.some(item => item.path.startsWith(album + '/')));
+  if (album) assert.ok(manifest.photos.some(item => item.path.startsWith(album + '/')));
   if (movedPhoto) {
     const moved = manifest.photos.find(item => item.original === movedPhoto);
     assert.ok(moved.path.startsWith(album + '/'), 'Manual reassignment must appear in the archive');
@@ -214,6 +215,75 @@ try {
     document.querySelector('#draft-status').textContent.includes('No draft'));
   assert.equal(await page.locator('#review .photo-card').count(), 2, 'Deleting a saved copy keeps the working set');
   console.log('PASS opt-in draft save, explicit restore after reload, original bytes, and deletion');
+
+  const copies = await context.newPage();
+  monitor(copies);
+  await copies.goto(origin);
+  await ready(copies);
+  await copies.locator('#discover').click();
+  const originals = new Map([['shore-01.jpg',path.join(demoDir,'shore-01.jpg')],['city-01.jpg',path.join(demoDir,'city-01.jpg')]]);
+  const exactPath = path.join(scratch,'exact-copy.jpg'), smallerPath = path.join(scratch,'smaller-copy.jpg');
+  await copyFile(originals.get('shore-01.jpg'),exactPath);
+  const resized = await copies.evaluate(async () => {
+    const img = new Image(); img.src = './assets/demo/shore-01.jpg'; await img.decode();
+    const canvas = document.createElement('canvas'); canvas.width = 260; canvas.height = Math.round(img.height*260/img.width);
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+    return canvas.toDataURL('image/jpeg',0.65).split(',')[1];
+  });
+  await writeFile(smallerPath,Buffer.from(resized,'base64'));
+  const all = new Map([...originals,['exact-copy.jpg',exactPath],['smaller-copy.jpg',smallerPath]]);
+  await chooseFiles(copies,button(copies,'Choose photos'),[...all.values()]);
+  const panel = copies.locator('#copies');
+  await panel.waitFor({timeout:5000});
+  assert.equal(await panel.locator('.copy-entry').count(),3);
+  assert.match(await panel.textContent(),/SHA-256/);
+  assert.match(await panel.textContent(),/correlation/i);
+  await button(copies,'Generate plans').click();
+  await copies.locator('.plan').first().click();
+  await checkExport(copies,all);
+  await panel.getByRole('button',{name:'Skip extra byte-identical copies'}).click();
+  if (process.argv.includes('--copies-screenshot'))
+    await panel.screenshot({path:path.join(root,'docs/duplicate-review.png')});
+  await copies.setViewportSize(mobile);
+  await layoutFits(copies);
+  await copies.setViewportSize(desktop);
+  await panel.getByRole('button',{name:'Skip smaller-copy.jpg'}).click();
+  assert.ok(await panel.getByRole('button',{name:'Skip shore-01.jpg'}).isDisabled());
+  assert.equal(await copies.locator('#review .photo-card').count(),2);
+  await checkExport(copies,originals,null,null,['exact-copy.jpg','smaller-copy.jpg']);
+  await copies.locator('#draft-tools summary').click();
+  await button(copies,'Save current draft').click();
+  await copies.waitForFunction(() => document.querySelector('#draft-status').textContent.includes('One saved'));
+  await copies.reload(); await ready(copies);
+  await copies.locator('#draft-tools summary').click(); await button(copies,'Restore draft').click();
+  await panel.getByRole('button',{name:'Include exact-copy.jpg'}).waitFor();
+  await checkExport(copies,originals,null,null,['exact-copy.jpg','smaller-copy.jpg']);
+  await panel.getByRole('button',{name:'Include exact-copy.jpg'}).click();
+  assert.equal(await copies.locator('#review .photo-card').count(),3);
+  await panel.getByRole('button',{name:'Include all again'}).click();
+  await checkExport(copies,all);
+  // v1.0 drafts had the original blobs and group assignments, but no fingerprints or skip flags.
+  await copies.evaluate(() => new Promise((resolve,reject) => {
+    const request = indexedDB.open('album-atlas-workspace-v1',1);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      const db = request.result, transaction = db.transaction('saved','readwrite');
+      transaction.onerror = () => reject(transaction.error);
+      transaction.oncomplete = () => { db.close(); resolve(); };
+      const table = transaction.objectStore('saved'), item = table.get('current');
+      item.onsuccess = () => {
+        const legacy = item.result;
+        for (const p of legacy.photos) { delete p.fingerprint; delete p.skipExport; }
+        table.put(legacy,'current');
+      };
+    };
+  }));
+  await copies.reload(); await ready(copies);
+  await copies.locator('#draft-tools summary').click(); await button(copies,'Restore draft').click();
+  await panel.getByRole('button',{name:'Skip extra byte-identical copies'}).waitFor();
+  await checkExport(copies,all);
+  await copies.close();
+  console.log('PASS exact/visual duplicate evidence, reversible export decisions, preserved bytes and saved draft');
 
   const offline = await browser.newContext({ viewport: desktop, serviceWorkers: 'allow' });
   const cachedPage = await offline.newPage();

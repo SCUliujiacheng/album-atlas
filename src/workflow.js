@@ -1,6 +1,7 @@
 import { parse } from '../vendor/exifr.mjs';
 import { extractEmbedding } from './embedding.js';
 import { classify, cluster } from './ml.js';
+import { fingerprint } from './duplicates.js';
 import { dateGroups, paletteGroups, shapeGroups, toneFromPixels } from './organize.js';
 export { exportAlbums } from './archive.js';
 
@@ -22,7 +23,7 @@ function canvasOf(image, maxSize) {
   return canvas;
 }
 
-async function readPhoto(file) {
+async function readPhoto(file, checkCopies = false) {
   if (!rasterExt.test(file.name) && !rasterType.test(file.type)) throw new Error('不支持此格式 · Unsupported format');
   if (file.type === 'image/svg+xml' || /\.svgz?$/i.test(file.name)) throw new Error('不支持 SVG · Unsupported SVG');
   if (!file.size || file.size > maxFileBytes) throw new Error('文件为空或超过 32 MiB · Empty or over 32 MiB');
@@ -46,20 +47,21 @@ async function readPhoto(file) {
       dateSource = date ? 'modified' : null;
     }
     return { id:id(), name:file.name, blob:file, url:URL.createObjectURL(thumb || file), thumb:thumb || file,
-      width, height, date, dateSource, palette, vector, kind };
+      width, height, date, dateSource, palette, vector, kind,
+      fingerprint:checkCopies ? await fingerprint(file,image) : undefined };
   } finally {
     URL.revokeObjectURL(original);
   }
 }
 
-export async function ingest(files, onProgress = () => {}) {
+export async function ingest(files, onProgress = () => {}, checkCopies = true) {
   const list = Array.from(files);
   const photos = [], errors = [];
   if (list.length > 300 || list.reduce((sum, file) => sum + file.size, 0) > maxBatchBytes) {
     return { photos, errors: ['每批最多 300 张、512 MiB · At most 300 files and 512 MiB per batch'] };
   }
   for (const [index, file] of list.entries()) {
-    try { photos.push(await readPhoto(file)); }
+    try { photos.push(await readPhoto(file,checkCopies)); }
     catch (e) { errors.push(file.name + ' — ' + (e.message || 'Unreadable image')); }
     onProgress(index + 1, list.length, file.name);
     if ((index + 1) % 4 === 0) await new Promise(resolve => setTimeout(resolve, 0));
@@ -83,7 +85,7 @@ export async function loadDemo(onProgress = () => {}) {
         const response = await fetch(url);
         if (!response.ok) throw new Error('Demo photo unavailable: ' + filename);
         const blob = await response.blob();
-        const photo = await readPhoto(new File([blob], filename, {type:'image/jpeg'}));
+        const photo = await readPhoto(new File([blob], filename, {type:'image/jpeg'}), n > 2);
         loaded.push(photo);
         // Illustrative dates create a time-based alternative in the sample set.
         photo.date = new Date(2025, 3, 5 + (n + albumIndex) % 3, 9 + albumIndex, n);

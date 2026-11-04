@@ -1,5 +1,6 @@
 import { loadDemo, ingest, organizeKnown, proposePlans, exportAlbums } from './workflow.js';
 import { saveDraft, loadDraft, clearDraft, hasDraft } from './draft.js';
+import { duplicateGroups, upgradePhotoFingerprints } from './duplicates.js';
 
 const byId = (id) => document.getElementById(id);
 const desk = byId('desk');
@@ -20,6 +21,7 @@ const fresh = () => ({
   mode: 'known',
   albums: [],
   photos: [],
+  copyGroups: [],
   known: null,
   discover: null,
   plans: [],
@@ -62,7 +64,8 @@ function button(label, fn, style = 'small-action', disabled = false) {
 }
 const count = (n) => t(n + ' 张', n + (n === 1 ? ' photo' : ' photos'));
 const albumName = (a) => (language === 'en' && a.nameEn ? a.nameEn : a.name);
-const photoMap = () => new Map(state.photos.map((p) => [p.id, p]));
+const includedPhotos = () => state.photos.filter(photo => !photo.skipExport);
+const photoMap = () => new Map(includedPhotos().map((p) => [p.id, p]));
 function notice(cn, en) {
   state.notice = cn ? [cn, en] : null;
   byId('live').textContent = state.notice ? t(...state.notice) : '';
@@ -161,6 +164,172 @@ function looseWell() {
   });
   return box;
 }
+function copiesView() {
+  if (!state.copyGroups.length) {
+    return state.photos.length < 2
+      ? document.createDocumentFragment()
+      : el(
+          'p',
+          { class: 'note' },
+          t(
+            '已检查 ' + count(state.photos.length) + '散图，未发现副本候选。',
+            'Checked ' + count(state.photos.length) + ' for duplicates. No candidates found.',
+          ),
+        );
+  }
+  const skipped = state.photos.filter((photo) => photo.skipExport).length;
+  const bytes = (size) =>
+    size < 1024 * 1024 ? Math.round(size / 1024) + ' KiB' : (size / 1024 / 1024).toFixed(1) + ' MiB';
+  function apply(photos, skip, focusId) {
+    for (const photo of photos) photo.skipExport = skip;
+    changed();
+    notice(
+      skip ? '已跳过所选副本，可随时恢复。' : '照片已重新纳入导出。',
+      skip
+        ? 'Selected copies will be skipped. You can include them again.'
+        : 'Photos are included again.',
+    );
+    render();
+    const focus = [...desk.querySelectorAll('[data-copy-toggle]')].find(
+      (node) => node.dataset.copyToggle === focusId,
+    );
+    if (focus) {
+      focus.closest('details').open = true;
+      focus.focus({ preventScroll: true });
+    } else scrollToArea('copies');
+  }
+  const extraExact = [];
+  for (const group of state.copyGroups) {
+    const seen = new Set();
+    for (const { photo } of group) {
+      const digest = photo.fingerprint.digest;
+      if (!digest || photo.skipExport) continue;
+      if (seen.has(digest)) extraExact.push(photo);
+      seen.add(digest);
+    }
+  }
+  return el(
+    'section',
+    { id: 'copies', class: 'copy-review', tabindex: '-1' },
+    el(
+      'div',
+      { class: 'row' },
+      el('h3', {}, t('副本复核', 'Duplicate review')),
+      el(
+        'span',
+        { class: 'meta' },
+        t(
+          state.copyGroups.length + ' 组候选 · 跳过 ' + skipped + ' 张',
+          state.copyGroups.length + (state.copyGroups.length === 1 ? ' candidate set' : ' candidate sets') + ' · ' + skipped + ' skipped',
+        ),
+      ),
+    ),
+    el(
+      'p',
+      { class: 'note' },
+      t(
+        '对照原图、尺寸和匹配依据。默认全部保留，你可以跳过某个副本，也可以恢复。',
+        'Compare the originals, dimensions and matching evidence. Every copy starts included. You can skip or restore individual files.',
+      ),
+    ),
+    el(
+      'div',
+      { class: 'actions' },
+      button(
+        t('每份相同文件只留一份', 'Skip extra byte-identical copies'),
+        () => apply(extraExact, true),
+        'small-action',
+        !extraExact.length,
+      ),
+      button(
+        t('恢复全部副本', 'Include all again'),
+        () =>
+          apply(
+            state.photos.filter((p) => p.skipExport),
+            false,
+          ),
+        'small-action',
+        !skipped,
+      ),
+    ),
+    state.copyGroups.map((group, index) => {
+      const included = group.filter(({ photo }) => !photo.skipExport).length;
+      const names = new Map(group.map(({ photo }) => [photo.id, photo.name]));
+      return el(
+        'details',
+        { class: 'copy-set', open: index === 0 },
+        el('summary', {}, t('候选组 ', 'Candidate set ') + (index + 1) + ' · ' + count(group.length)),
+        el(
+          'div',
+          { class: 'copy-grid' },
+          group.map((member) => {
+            const { photo, kind, withId } = member;
+            const evidence =
+              kind === 'exact'
+                ? t(
+                    '与 ' + names.get(withId) + ' 的 SHA-256 相同。',
+                    'Same SHA-256 as ' + names.get(withId) + '.',
+                  )
+                : kind === 'similar'
+                  ? t(
+                      '与 ' + names.get(withId) + ' 的明暗相关度为 ',
+                      'Luminance correlation with ' + names.get(withId) + ' · ',
+                    ) +
+                    member.correlation.toFixed(3) +
+                    t('，色差 ', ' · color difference ') +
+                    member.colorDifference.toFixed(3)
+                  : t('本组用于比对的第一张照片。', 'First photo used for visual comparison.');
+            const include = Boolean(photo.skipExport);
+            return el(
+              'article',
+              { class: 'copy-entry' + (include ? ' omitted' : '') },
+              el(
+                'button',
+                {
+                  type: 'button',
+                  class: 'copy-preview',
+                  'aria-label': t('预览 ', 'Preview ') + photo.name,
+                  onclick: () => openPhoto(photo),
+                },
+                el('img', { src: photo.url, alt: '', loading: 'lazy' }),
+              ),
+              el('strong', { class: 'copy-file' }, photo.name),
+              el(
+                'span',
+                { class: 'detail' },
+                photo.width + ' × ' + photo.height + ' · ' + bytes(photo.blob.size),
+              ),
+              el(
+                'b',
+                { class: 'copy-tag' },
+                kind === 'exact'
+                  ? t('文件完全相同', 'Identical bytes')
+                  : kind === 'similar'
+                    ? t('画面相近', 'Similar appearance')
+                    : t('比对照片', 'Comparison photo'),
+              ),
+              el('p', { class: 'note' }, evidence),
+              el(
+                'button',
+                {
+                  type: 'button',
+                  class: 'small-action',
+                  'data-copy-toggle': photo.id,
+                  'aria-label': (include ? t('恢复 ', 'Include ') : t('跳过 ', 'Skip ')) + photo.name,
+                  disabled: state.busy || (!include && included === 1),
+                  onclick: () => apply([photo], !include, photo.id),
+                },
+                include
+                  ? t('已跳过 · 恢复', 'Skipped · include again')
+                  : t('保留中 · 跳过', 'Included · skip'),
+              ),
+            );
+          }),
+        ),
+      );
+    }),
+  );
+}
 function limitsView() {
   return el(
     'details',
@@ -245,14 +414,15 @@ function render() {
   byId('reset').hidden = !(state.photos.length || state.albums.length);
   byId('live').textContent = state.notice ? t(...state.notice) : '';
   errorsView();
-  const ready = state.photos.length > 0 && (!known || state.albums.length > 0);
+  const includedCount = includedPhotos().length;
+  const ready = includedCount > 0 && (!known || state.albums.length > 0);
   const help = !state.photos.length
     ? t('先添加待整理照片，或使用上方示例。', 'Add some photos or try the demo above.')
     : known && !state.albums.length
       ? t('至少需要一个有参考照片的相册。', 'Add at least one album with reference photos.')
       : t(
-          count(state.photos.length) + '待整理，原图保持原样。',
-          count(state.photos.length) + ' ready. Originals stay untouched.',
+          count(includedCount) + '将进入复核与导出，原图保持原样。',
+          count(includedCount) + ' included in review and export. Originals stay untouched.',
         );
   const hasOutput = state[state.mode] || (!known && state.plans.length);
   desk.replaceChildren(
@@ -270,6 +440,7 @@ function render() {
           ),
     ),
     el('div', { class: 'import-grid' + (known ? '' : ' single') }, looseWell(), known && refWell()),
+    copiesView(),
     limitsView(),
     el(
       'div',
@@ -534,6 +705,7 @@ function photoCard(photo, groupId, res) {
   );
 }
 function albumSection(g, photos, res, review = false) {
+  const present = g.photoIds.filter(id=>photos.has(id));
   const title = review
     ? el('h4', { class: 'group-title' }, t('待确认', 'Needs review'))
     : el('input', {
@@ -568,7 +740,7 @@ function albumSection(g, photos, res, review = false) {
       'div',
       { class: 'group-head' },
       title,
-      el('span', { class: 'meta' }, count(g.photoIds.length)),
+      el('span', { class: 'meta' }, count(present.length)),
       review &&
         button(t('保留为独立相册', 'Keep as a separate album'), () => {
           rememberEdit(res);
@@ -576,9 +748,9 @@ function albumSection(g, photos, res, review = false) {
             id: newGroupId(),
             name: '待整理',
             nameEn: 'Unfiled',
-            photoIds: [...res.uncertainIds],
+            photoIds: [...present],
           });
-          res.uncertainIds = [];
+          res.uncertainIds = res.uncertainIds.filter(id=>!photos.has(id));
           res.edited = true;
           changed();
           render();
@@ -594,11 +766,11 @@ function albumSection(g, photos, res, review = false) {
           'Choose an album for each photo, or keep this set together.',
         ),
       ),
-    g.photoIds.length
+    present.length
       ? el(
           'div',
           { class: 'group-grid' },
-          g.photoIds.map((id) => photos.has(id) && photoCard(photos.get(id), g.id, res)),
+          present.map((id) => photoCard(photos.get(id), g.id, res)),
         )
       : el(
           'p',
@@ -609,6 +781,7 @@ function albumSection(g, photos, res, review = false) {
 }
 function reviewView(res) {
   const photos = photoMap();
+  const pending = res.uncertainIds.filter(id=>photos.has(id));
   const undo = button(t('撤销上一步', 'Undo last edit'), () => undoEdit(res), 'small-action', !res.undo);
   undo.id = 'undo';
   return el(
@@ -640,8 +813,8 @@ function reviewView(res) {
     el(
       'div',
       { class: 'groups' },
-      res.uncertainIds.length > 0 &&
-        albumSection({ id: unassigned, photoIds: res.uncertainIds }, photos, res, true),
+      pending.length > 0 &&
+        albumSection({ id: unassigned, photoIds: pending }, photos, res, true),
       res.groups.map((g) => albumSection(g, photos, res)),
     ),
     el(
@@ -650,21 +823,21 @@ function reviewView(res) {
       el(
         'p',
         { class: 'note' },
-        res.uncertainIds.length
+        pending.length
           ? t(
-              '导出前请先处理 ' + res.uncertainIds.length + ' 张待确认照片。',
-              'Review ' + res.uncertainIds.length + ' remaining photos before export.',
+              '导出前请先处理 ' + pending.length + ' 张待确认照片。',
+              'Review ' + pending.length + ' remaining photos before export.',
             )
           : t(
-              'ZIP 包含本次待整理照片的原始文件副本，按相册存放。参考照片不会重复打包。',
-              'The ZIP contains copies of the original unsorted files, filed by album. Reference photos are excluded.',
+              '本次导出 '+photos.size+' 张原图，跳过 '+(state.photos.length-photos.size)+' 张副本。',
+              count(photos.size) + ' included in this ZIP · ' + (state.photos.length - photos.size) + ' skipped.',
             ),
       ),
       button(
         t('导出 ZIP', 'Download ZIP'),
         () => download(res),
         'button primary',
-        res.uncertainIds.length > 0 || !res.groups.some((g) => g.photoIds.length),
+        pending.length > 0 || !photos.size,
       ),
     ),
   );
@@ -763,7 +936,7 @@ async function addFiles(files, kind, name = '') {
           '读取 ' + progress + ' · ' + (filename || ''),
           'Reading ' + progress + ' · ' + (filename || ''),
         );
-      });
+      }, kind==='loose');
       state.errors.push(...errors.map(errText));
       offset += batch.length;
       if (photos.length) {
@@ -789,6 +962,7 @@ async function addFiles(files, kind, name = '') {
           else state.albums.push({ id: newGroupId(), name: batch.label, photos: batch.photos });
         }
       }
+      state.copyGroups = duplicateGroups(state.photos);
       changed();
     }
     notice(
@@ -853,6 +1027,7 @@ async function tryDemo() {
     releaseWorkspace();
     state.albums = demo.albums;
     state.photos = demo.photos;
+    state.copyGroups = duplicateGroups(state.photos);
     state.sample = true;
     state.dirty = false;
     state.known = null;
@@ -1033,6 +1208,8 @@ byId('draft-load').addEventListener('click', async () => {
     }
     releaseWorkspace();
     state = { ...fresh(), ...draft, busy: true, dirty: false, sample: false };
+    await upgradePhotoFingerprints(state.photos);
+    state.copyGroups = duplicateGroups(state.photos);
     state.mode = draft.mode === 'discover' ? 'discover' : 'known';
     draftIsCurrent = true;
     notice('已恢复本机草稿。', 'Local draft restored.');

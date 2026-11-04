@@ -6,6 +6,10 @@
 
 ![Album Atlas 界面，包含示例照片与两种整理入口](docs/workbench.png)
 
+### 同一张照片有好几个版本，导出哪一张？
+
+导入散图后，**副本复核**会并排列出文件名、像素尺寸、文件大小和匹配依据。重命名的相同文件会显示 SHA-256 一致；缩小、压缩过的版本可按画面结构和颜色列为候选。默认全部保留，可以一键跳过字节完全相同的多余副本，也可以逐张查看大图，决定跳过或恢复。选择会保存在本机草稿中，导出清单会记录跳过的文件。[与开源 ImageHash 的对照实测](docs/duplicate-evaluation.md)
+
 ### 我有几个整理好的相册，想把新照片放进去
 
 1. 打开 **归入已有相册**，选择含多个相册子文件夹的上级目录。也可以手动创建相册，选几张参考照。每个相册最好有几张构图、明暗各不相同的代表照。
@@ -48,6 +52,8 @@ npm start
 
 - **Match existing albums.** Import a folder of reference albums, add new photos, and review suggested destinations. Uncertain matches stay in a separate queue. You can create a destination, move a photo, or set aside the whole queue.
 - **Discover new groups.** Preview several arrangements of the same photos by visual similarity, color, dates, or orientation. Choose a plan, rename the groups, then export copies of the original files in a ZIP.
+
+**Review duplicate copies in either workflow.** Compare photographs side by side, including dimensions, file sizes and exact-byte or visual evidence. You can skip extra identical copies together or decide individually about similar-looking versions. Restoring a copy brings back its album assignment. The ZIP manifest lists any skipped copies. [Duplicate benchmark and limitations](docs/duplicate-evaluation.md)
 
 The app serves its model and libraries locally. Optional drafts store copies on your device. The included photographs are a walkthrough. For independently measured matching performance, coverage, and false assignments, see the [evaluation report](docs/model-evaluation.md).
 

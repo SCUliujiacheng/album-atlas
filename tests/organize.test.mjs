@@ -4,6 +4,16 @@ import { dateGroups, toneFromPixels, paletteGroups, shapeGroups } from '../src/o
 import { exportAlbums } from '../src/archive.js';
 import { unzipSync } from '../vendor/fflate.mjs';
 
+test('an explicitly skipped copy can stay unassigned without hiding any other missed assignment', async () => {
+  const photos = ['one','copy','two'].map(id => ({id, name:id+'.jpg', blob:new Blob([id]), skipExport:id==='copy'}));
+  await assert.rejects(exportAlbums(photos,[{name:'Kept', photoIds:['one']}]), /need a destination/);
+  const zip = await exportAlbums(photos,[{name:'Kept', photoIds:['one','two']}]);
+  const files = unzipSync(new Uint8Array(await zip.arrayBuffer()));
+  assert.deepEqual(Object.keys(files).sort(),['Kept/one.jpg','Kept/two.jpg','album-atlas.json']);
+  const manifest = JSON.parse(new TextDecoder().decode(files['album-atlas.json']));
+  assert.deepEqual(manifest.skippedCopies,[{original:'copy.jpg',bytes:4}]);
+});
+
 test('same-day sessions preserve unknown dates and use a 90-minute gap', () => {
   const photos = [null, [9,15], [15,0], [9,55]].map((t,i) => ({id:String(i),date:t && new Date(2026,3,4,...t)}));
   assert.deepEqual(dateGroups(photos).map(g => g.photoIds), [['0'],['1','3'],['2']]);

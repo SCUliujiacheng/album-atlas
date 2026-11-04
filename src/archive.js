@@ -33,6 +33,7 @@ function uniqueName(value, used, preserveExtension = false) {
 
 export async function exportAlbums(photos, groups) {
   const byId = new Map(photos.map(p => [p.id, p]));
+  const omittedCopies = photos.filter(p => p.skipExport === true);
   const groupNames = new Set(['album-atlas.json']);
   const seen = new Set(), manifest = [], parts = [];
   const zip = new Zip((error, chunk) => {
@@ -45,6 +46,7 @@ export async function exportAlbums(photos, groups) {
     const fileNames = new Set();
     for (const id of group.photoIds) {
       const photo = byId.get(id);
+      if (photo?.skipExport === true) continue;
       if (!photo || seen.has(id)) throw new Error('Invalid or repeated photo in export');
       seen.add(id);
       const path = folder + '/' + uniqueName(photo.name, fileNames, true);
@@ -57,10 +59,12 @@ export async function exportAlbums(photos, groups) {
   }
   if (!manifest.length) throw new Error('No photos to export');
   // A missed assignment must never silently drop an original from an export.
-  if (seen.size !== byId.size) throw new Error('Some photos still need a destination');
+  if (seen.size !== byId.size - omittedCopies.length) throw new Error('Some photos still need a destination');
   const index = new ZipPassThrough('album-atlas.json');
   zip.add(index);
-  index.push(strToU8(JSON.stringify({ version: 1, photos: manifest }, null, 2)), true);
+  const contents = { version: 1, photos: manifest };
+  if (omittedCopies.length) contents.skippedCopies = omittedCopies.map(p => ({original:p.name, bytes:p.blob.size}));
+  index.push(strToU8(JSON.stringify(contents, null, 2)), true);
   zip.end();
   return new Blob(parts, {type: 'application/zip'});
 }
