@@ -1,0 +1,386 @@
+[
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_land277.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_n291076.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_nat566.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_natu649.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_art294.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_n384030.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_nat605.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_natu631.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_n672021.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_land114.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_n344048.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_nat284.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_open13.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_sun32.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_bea4.jpg"
+  },
+  {
+    "label": "coast",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/coast_natu777.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natc49.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_text124.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu15.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_for28.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_for25.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu913.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu848.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_for114.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_text75.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_cdmc317.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_bost100.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu170.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_nat1253.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_land765.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu994.jpg"
+  },
+  {
+    "label": "forest",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/forest_natu424.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art20.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art690.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_a140032.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art770.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_gre262.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_hous1.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_boston149.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_urb454.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art642.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_urb721.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art1135.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art569.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art1044.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_boston262.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_art669.jpg"
+  },
+  {
+    "label": "insidecity",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/insidecity_hous13.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_sharp13.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_n480098.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_ski62.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_natu668.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_n44003.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_sopen16.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_land18.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_natu750.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_n737049.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_land315.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_n860054.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_natu974.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_land775.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_sharp12.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_n199080.jpg"
+  },
+  {
+    "label": "mountain",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/mountain_nat51.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_par70.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_art1686.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_urb562.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_par198.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_boston1.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_bost76.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_boston397.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_gre295.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_gre193.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_gre653.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_street27.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_bost65.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_a281067.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_boston306.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_art779.jpg"
+  },
+  {
+    "label": "street",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/street_par59.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_art15.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_art1387.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_urb914.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_art309.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_art1538.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a462025.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a279032.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_urban1158.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_urban1056.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_city30.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a487056.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a438046.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a588087.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_a487065.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_urb391.jpg"
+  },
+  {
+    "label": "tallbuilding",
+    "zipEntry": "spatial_envelope_256x256_static_8outdoorcategories/tallbuilding_art326.jpg"
+  }
+]

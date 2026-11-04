@@ -8,6 +8,8 @@
 
 ### 同一张照片有好几个版本，导出哪一张？
 
+如果一张照片看起来像另一张的局部，可以在 **裁剪对照** 中点击「查找裁剪候选」。打开候选，按矩形框核对原图，再以 100% 或 200% 放大看人脸和小字。点击已核看后，两份文件都会保留。可先用 [四张练习照片](docs/crop-practice.zip) 试一遍。[裁剪对照实验和失败例](docs/crop-review.md)
+
 导入散图后，**副本复核**会并排列出文件名、像素尺寸、文件大小和匹配依据。重命名的相同文件会显示 SHA-256 一致；缩小、压缩过的版本可按画面结构和颜色列为候选。默认全部保留，可以一键跳过字节完全相同的多余副本，也可以逐张查看大图，决定跳过或恢复。选择会保存在本机草稿中，导出清单会记录跳过的文件。[与开源 ImageHash 的对照实测](docs/duplicate-evaluation.md)
 
 ### 我有几个整理好的相册，想把新照片放进去
@@ -49,6 +51,8 @@ npm start
 
 ### English guide
 
+**Possible crops.** Import unsorted photos and start the optional crop review. Compare the originals at full resolution, inspect the proposed rectangle, and keep both files as reviewed. The worker stops at the 61st candidate and shows at most 60 direct pairs. [Practice photos](docs/crop-practice.zip) · [Measured comparison with ImageHash](docs/crop-review.md)
+
 **Album Atlas organizes photos privately in your browser.** Open the app, switch to **English**, and try the sample collection or choose your own images. There are two workflows.
 
 - **Match existing albums.** Import a folder of reference albums, add new photos, and review suggested destinations. Uncertain matches stay in a separate queue. You can create a destination, move a photo, or set aside the whole queue.
@@ -68,6 +72,7 @@ npm test
 npm run check:offline
 npx playwright install chromium
 npm run test:browser
+npm run test:crops
 ```
 
 The browser suite exercises folder import, both sorting modes, manual correction, local drafts, offline inference and byte-for-byte export. After changing app assets, regenerate the offline cache manifest with `npm run build:offline`.

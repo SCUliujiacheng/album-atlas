@@ -1,0 +1,174 @@
+{
+  "imagehashVersion": "4.3.2",
+  "pillowVersion": "12.0.0",
+  "uniqueEncodedFiles": 1584,
+  "pairs": 7128,
+  "cropLocalization": {
+    "accepted": 690,
+    "correctContainer": 690,
+    "medianIoUOnCorrectContainer": 0.9872611464968153
+  },
+  "families": {
+    "bytes": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 96,
+      "imagehashTwoRegionsEightBits": 95,
+      "atlasWholeFrame": 96,
+      "atlasCombined": 96
+    },
+    "center-72": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 54,
+      "imagehashTwoRegionsEightBits": 6,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 85
+    },
+    "center-82": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 78,
+      "imagehashTwoRegionsEightBits": 12,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 87
+    },
+    "cropped panel with changed notice": {
+      "pairs": 24,
+      "expectedPositive": 0,
+      "imagehashDefault": 12,
+      "imagehashTwoRegionsEightBits": 1,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 6
+    },
+    "distinct across class": {
+      "pairs": 3840,
+      "expectedPositive": 0,
+      "imagehashDefault": 73,
+      "imagehashTwoRegionsEightBits": 0,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 0
+    },
+    "distinct colorway": {
+      "pairs": 24,
+      "expectedPositive": 0,
+      "imagehashDefault": 24,
+      "imagehashTwoRegionsEightBits": 24,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 0
+    },
+    "distinct framed scenes": {
+      "pairs": 24,
+      "expectedPositive": 0,
+      "imagehashDefault": 11,
+      "imagehashTwoRegionsEightBits": 0,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 0
+    },
+    "distinct same class": {
+      "pairs": 720,
+      "expectedPositive": 0,
+      "imagehashDefault": 25,
+      "imagehashTwoRegionsEightBits": 0,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 0
+    },
+    "jpeg": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 96,
+      "imagehashTwoRegionsEightBits": 93,
+      "atlasWholeFrame": 96,
+      "atlasCombined": 96
+    },
+    "landscape": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 58,
+      "imagehashTwoRegionsEightBits": 4,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 63
+    },
+    "nearest unrelated original vs crop": {
+      "pairs": 1152,
+      "expectedPositive": 0,
+      "imagehashDefault": 60,
+      "imagehashTwoRegionsEightBits": 1,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 0
+    },
+    "offcenter-61": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 27,
+      "imagehashTwoRegionsEightBits": 4,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 55
+    },
+    "offcenter-69": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 44,
+      "imagehashTwoRegionsEightBits": 6,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 17
+    },
+    "portrait": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 36,
+      "imagehashTwoRegionsEightBits": 7,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 53
+    },
+    "stress-center-high": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 79,
+      "imagehashTwoRegionsEightBits": 19,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 88
+    },
+    "stress-center-low": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 38,
+      "imagehashTwoRegionsEightBits": 1,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 76
+    },
+    "stress-landscape": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 43,
+      "imagehashTwoRegionsEightBits": 5,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 27
+    },
+    "stress-offcenter-high": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 67,
+      "imagehashTwoRegionsEightBits": 11,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 73
+    },
+    "stress-offcenter-low": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 33,
+      "imagehashTwoRegionsEightBits": 1,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 36
+    },
+    "stress-portrait": {
+      "pairs": 96,
+      "expectedPositive": 96,
+      "imagehashDefault": 38,
+      "imagehashTwoRegionsEightBits": 2,
+      "atlasWholeFrame": 0,
+      "atlasCombined": 30
+    }
+  },
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+}

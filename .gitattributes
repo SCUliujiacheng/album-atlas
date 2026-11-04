@@ -2,4 +2,5 @@
 *.jpg binary
 *.png binary
 *.bin binary
+*.zip binary
 vendor/** -text

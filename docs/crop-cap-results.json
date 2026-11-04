@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "browser": "156.0.8078.80",
+  "platform": "win32-x64",
+  "archive": "docs/crop-practice.zip",
+  "archiveSha256": "8f601e14d6f74819a3a625c06a8c73a2866747f9ecfe4b3d55d0abb2712d5029",
+  "members": [
+    "01-coast-full.jpg",
+    "02-coast-detail.jpg"
+  ],
+  "fixture": "Repeated-content stress: 150 handles for one full image followed by 150 handles for its crop, unique IDs and two shared immutable JPEG blobs.",
+  "productionScope": "Fresh real scan worker per run. Includes worker launch, 300 image decodes, indexing and capped comparison; ordinary whole-frame fingerprints already exist. Page heartbeat interval is 20 ms.",
+  "comparisonScope": "Both pure loops run in the same renderer on the same 300 IDs; each distinct JPEG was crop-encoded once before timing. Exhaustive loop counts hits without allocating a result list.",
+  "cpuScope": "Sum of renderer-process CPU-time deltas in isolated Chromium, including the dedicated worker when present; excludes browser/GPU processes.",
+  "production": [
+    {
+      "wallMs": 1344,
+      "heartbeatTicks": 67,
+      "heartbeatP95Ms": 21,
+      "heartbeatMaxMs": 22,
+      "retained": 60,
+      "examinedPairs": 210,
+      "totalPairs": 44850,
+      "atLeast": 61,
+      "truncated": true,
+      "rendererCpuMs": 1330
+    },
+    {
+      "wallMs": 1322,
+      "heartbeatTicks": 66,
+      "heartbeatP95Ms": 21,
+      "heartbeatMaxMs": 21,
+      "retained": 60,
+      "examinedPairs": 210,
+      "totalPairs": 44850,
+      "atLeast": 61,
+      "truncated": true,
+      "rendererCpuMs": 1338
+    },
+    {
+      "wallMs": 1290,
+      "heartbeatTicks": 64,
+      "heartbeatP95Ms": 21,
+      "heartbeatMaxMs": 21,
+      "retained": 60,
+      "examinedPairs": 210,
+      "totalPairs": 44850,
+      "atLeast": 61,
+      "truncated": true,
+      "rendererCpuMs": 1303
+    }
+  ],
+  "pairOnly": {
+    "capped": [
+      {
+        "wallMs": 57,
+        "examined": 210,
+        "hits": 61,
+        "rendererCpuMs": 86
+      },
+      {
+        "wallMs": 47,
+        "examined": 210,
+        "hits": 61,
+        "rendererCpuMs": 48
+      },
+      {
+        "wallMs": 49,
+        "examined": 210,
+        "hits": 61,
+        "rendererCpuMs": 50
+      }
+    ],
+    "exhaustive": [
+      {
+        "wallMs": 17477,
+        "examined": 44850,
+        "hits": 22500,
+        "rendererCpuMs": 17449
+      },
+      {
+        "wallMs": 17519,
+        "examined": 44850,
+        "hits": 22500,
+        "rendererCpuMs": 17549
+      },
+      {
+        "wallMs": 19265,
+        "examined": 44850,
+        "hits": 22500,
+        "rendererCpuMs": 18935
+      }
+    ]
+  },
+  "cancellation": {
+    "canceledAt": {
+      "phase": "encoding",
+      "completed": 18,
+      "total": 300
+    },
+    "errorName": "AbortError",
+    "observedAfterMs": 250,
+    "lateProgress": 0
+  }
+}

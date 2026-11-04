@@ -1,6 +1,7 @@
 import { loadDemo, ingest, organizeKnown, proposePlans, exportAlbums } from './workflow.js';
 import { saveDraft, loadDraft, clearDraft, hasDraft } from './draft.js';
 import { duplicateGroups, upgradePhotoFingerprints } from './duplicates.js';
+import { createCropReview } from './crop-review.js';
 
 const byId = (id) => document.getElementById(id);
 const desk = byId('desk');
@@ -17,6 +18,7 @@ try {
   /* storage is optional */
 }
 const t = (cn, en) => (language === 'en' ? en : cn);
+const cropReview = createCropReview(t);
 const fresh = () => ({
   mode: 'known',
   albums: [],
@@ -334,7 +336,7 @@ function limitsView() {
   return el(
     'details',
     { class: 'format-note' },
-    el('summary', {}, t('支持的格式与容量', 'Supported formats and limits')),
+    el('summary', {}, t('支持的格式、容量与练习图片', 'Supported formats, limits and practice photos')),
     el(
       'p',
       { class: 'note' },
@@ -343,6 +345,8 @@ function limitsView() {
         'Supports JPEG, PNG, WebP, GIF, BMP and browser-decodable AVIF. Convert HEIC or camera RAW to JPEG first. Up to 32 MiB per photo, and 300 photos or 512 MiB in total, including references.',
       ),
     ),
+    el('a', { id:'crop-practice-help', class:'crop-practice', href:'./docs/crop-practice.zip', download:'crop-practice.zip' },
+      t('下载裁剪练习图片（ZIP），解压后选择图片进行对照。', 'Download crop practice photos (ZIP). Unzip and choose the images to compare them.')),
   );
 }
 function refWell() {
@@ -441,6 +445,7 @@ function render() {
     ),
     el('div', { class: 'import-grid' + (known ? '' : ' single') }, looseWell(), known && refWell()),
     copiesView(),
+    cropReview.render(state.photos, state.busy),
     limitsView(),
     el(
       'div',
@@ -844,6 +849,7 @@ function reviewView(res) {
 }
 
 function releaseWorkspace() {
+  cropReview.release();
   const urls = new Set([...state.photos, ...state.albums.flatMap((a) => a.photos)].map((p) => p.url));
   for (const url of urls) if (url?.startsWith('blob:')) URL.revokeObjectURL(url);
 }
@@ -925,6 +931,7 @@ async function addFiles(files, kind, name = '') {
     scrollToArea('workspace');
     return;
   }
+  if (kind === 'loose' || demoBefore) cropReview.invalidate();
   const ok = await working('正在本地读取照片…', 'Reading photos on this device…', async () => {
     const imports = [];
     let offset = 0;
@@ -1017,6 +1024,7 @@ async function tryDemo() {
   )
     return;
   scrollToArea('workspace');
+  cropReview.invalidate();
   const ok = await working('正在打开示例工作台…', 'Opening the demo workspace…', async () => {
     const demo = await loadDemo((done, total) =>
       notice(
@@ -1186,6 +1194,7 @@ byId('draft-load').addEventListener('click', async () => {
     )
   )
     return;
+  cropReview.invalidate();
   const ok = await working('正在恢复本机草稿…', 'Restoring local draft…', async () => {
     const draft = await loadDraft();
     if (!draft) {

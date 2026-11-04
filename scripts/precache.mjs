@@ -9,7 +9,7 @@ async function list(dir) {
   const groups = await Promise.all(entries.map(x => x.isDirectory() ? list(dir + '/' + x.name) : [dir + '/' + x.name]));
   return groups.flat();
 }
-const assets = ['index.html','app.webmanifest',...(await list('src')),...(await list('assets')),...(await list('vendor'))].sort();
+const assets = ['index.html','app.webmanifest','docs/crop-practice.zip',...(await list('src')),...(await list('assets')),...(await list('vendor'))].sort();
 const hash = createHash('sha256');
 for (const file of [...assets,'sw.js']) {
   const bytes = await readFile(join(root,file));
